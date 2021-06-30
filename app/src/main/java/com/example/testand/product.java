@@ -24,11 +24,14 @@ public class product extends AppCompatActivity {
     EditText et,cp,pd;
     Button bt,logot;
     TextView tv;
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        cp=findViewById(R.id.company);
+        //cp=findViewById(R.id.company);
         et=findViewById(R.id.word);
         bt=findViewById(R.id.button);
         pd=findViewById(R.id.prdesc);
@@ -61,8 +64,10 @@ public class product extends AppCompatActivity {
 
                 HashMap <String,Object> hm=new HashMap<>();
 
+                String split_first = tv.getText().toString().substring(0,tv.getText().toString().indexOf("@"));
+
                 hm.put(pd.getText().toString(),et.getText().toString());
-                FirebaseDatabase.getInstance().getReference().child(cp.getText().toString())
+                FirebaseDatabase.getInstance().getReference().child(split_first)
                         .push()
                         .setValue(hm)
                         .addOnCompleteListener(task ->
