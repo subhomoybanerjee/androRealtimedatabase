@@ -12,20 +12,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 public class product extends AppCompatActivity {
 
+    public static final String s="com.example.record.extra.NAME";
+    EditText et,pd;
+    Button bt,logot,bts;
+    TextView tv,cp;
+    DatabaseReference myref;
+    FirebaseDatabase db;
 
-    EditText et,cp,pd;
-    Button bt,logot;
-    TextView tv;
-
-
+    public void tost(String s){
+        Toast.makeText(product.this,s,Toast.LENGTH_SHORT).show();
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,7 @@ public class product extends AppCompatActivity {
         //cp=findViewById(R.id.company);
         et=findViewById(R.id.word);
         bt=findViewById(R.id.button);
+        bts=findViewById(R.id.button2);
         pd=findViewById(R.id.prdesc);
         tv=findViewById(R.id.tvname);
         logot=findViewById(R.id.logout);
@@ -46,9 +53,14 @@ public class product extends AppCompatActivity {
 
         tv.setText(sho);
         tv.setText(sholg);
+        String split_first = tv.getText().toString().substring(0,tv.getText().toString().indexOf("@"));
+
+        db=FirebaseDatabase.getInstance();
+        myref=db.getReference(split_first);
 
         //Log.i(TAG, "intent created:  "+sho+sholg);
 
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child(split_first);
         logot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,22 +72,25 @@ public class product extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 HashMap <String,Object> hm=new HashMap<>();
-
-                String split_first = tv.getText().toString().substring(0,tv.getText().toString().indexOf("@"));
-
-                hm.put(pd.getText().toString(),et.getText().toString());
-                FirebaseDatabase.getInstance().getReference().child(split_first)
-                        .push()
-                        .setValue(hm)
-                        .addOnCompleteListener(task ->
-                                Toast.makeText(product.this,"huehue",Toast.LENGTH_SHORT).show());
-
+                hm.put("company",et.getText().toString());
+                hm.put("product",pd.getText().toString());
+                myref.push().setValue(hm).addOnCompleteListener(task -> tost("added")) ;
 
             }
         });
+
+        bts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),showdata.class);
+                intent.putExtra(s,split_first);
+                startActivity(intent);
+
+            }
+        });
+
+
 
     }
 }
