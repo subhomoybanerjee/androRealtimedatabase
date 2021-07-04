@@ -11,19 +11,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Testand">
-        <activity android:name=".showdata"></activity>
-        <activity android:name=".login" />
-        <activity android:name=".register">
+
+        <activity
+            android:name=".showdata"
+            android:label="see data" />
+
+        <activity
+            android:name=".login"
+            android:label="lgn"/>
+
+        <activity
+            android:name=".register"
+            android:label="rgstr">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".product"
-            android:label="reg"
-            android:parentActivityName=".register" />
+            android:label="product/add" />
+
     </application>
 
 </manifest>

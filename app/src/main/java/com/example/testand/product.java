@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,7 +29,7 @@ public class product extends AppCompatActivity {
     TextView tv,cp;
     DatabaseReference myref;
     FirebaseDatabase db;
-
+    String uid;
     public void tost(String s){
         Toast.makeText(product.this,s,Toast.LENGTH_SHORT).show();
     }
@@ -47,13 +48,22 @@ public class product extends AppCompatActivity {
 
         Intent intent=getIntent();
 
+        /*
         String sholg=intent.getStringExtra(login.d);
-        String sho=intent.getStringExtra(register.s);
+        String sho=intent.getStringExtra(register.s);*/
 
+        FirebaseUser curruser=FirebaseAuth.getInstance().getCurrentUser();
+        if(curruser!=null){
+            uid=curruser.getEmail();
+        }
 
-        tv.setText(sho);
+        tv.setText(uid);
+
+        /*tv.setText(sho);
         tv.setText(sholg);
-        String split_first = tv.getText().toString().substring(0,tv.getText().toString().indexOf("@"));
+        String split_first = tv.getText().toString().substring(0,tv.getText().toString().indexOf("@"));*/
+
+        String split_first=uid.toString().substring(0,uid.toString().indexOf("@"));
 
         db=FirebaseDatabase.getInstance();
         myref=db.getReference(split_first);
@@ -72,11 +82,15 @@ public class product extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap <String,Object> hm=new HashMap<>();
-                hm.put("company",et.getText().toString());
-                hm.put("product",pd.getText().toString());
-                myref.push().setValue(hm).addOnCompleteListener(task -> tost("added")) ;
-
+                if(et.getText().toString().isEmpty() || pd.getText().toString().isEmpty()){
+                    tost("no value");
+                }
+                else{
+                    HashMap <String,Object> hm=new HashMap<>();
+                    hm.put("company",et.getText().toString());
+                    hm.put("product",pd.getText().toString());
+                    myref.push().setValue(hm).addOnCompleteListener(task -> tost("added")) ;
+                }
             }
         });
 
