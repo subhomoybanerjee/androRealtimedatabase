@@ -8,13 +8,13 @@
     tools:context=".showdata">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recview"
-        android:layout_width="420dp"
-        android:layout_height="675dp"
-        android:background="@drawable/a"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/recview"
+            android:layout_width="400dp"
+            android:layout_height="730dp"
+            android:background="@drawable/a"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

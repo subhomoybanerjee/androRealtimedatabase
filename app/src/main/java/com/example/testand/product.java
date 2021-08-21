@@ -25,7 +25,7 @@ public class product extends AppCompatActivity {
 
     public static final String s="com.example.record.extra.NAME";
     EditText et,pd;
-    Button bt,logot,bts;
+    Button bt,logot,bts,rem;
     TextView tv,cp;
     DatabaseReference myref;
     FirebaseDatabase db;
@@ -45,6 +45,7 @@ public class product extends AppCompatActivity {
         pd=findViewById(R.id.prdesc);
         tv=findViewById(R.id.tvname);
         logot=findViewById(R.id.logout);
+
 
         Intent intent=getIntent();
 
@@ -103,6 +104,8 @@ public class product extends AppCompatActivity {
 
             }
         });
+
+
 
 
 

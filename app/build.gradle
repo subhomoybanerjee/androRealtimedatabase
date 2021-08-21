@@ -16,6 +16,20 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        debug {
+            storeFile file('./debug.keystore')
+            storePassword 'chamgadadh'
+            keyAlias 'testand'
+            keyPassword 'chamgadadh'
+        }
+        release {
+            storeFile file('./debug.keystore')
+            storePassword 'chamgadadh'
+            keyAlias 'testand'
+            keyPassword 'chamgadadh'
+        }
+    }
 
     buildTypes {
         release {

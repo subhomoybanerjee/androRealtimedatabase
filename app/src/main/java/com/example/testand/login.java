@@ -48,6 +48,11 @@ public class login extends AppCompatActivity {
                 String nme=lnme.getText().toString();
                 String pss=lpass.getText().toString();
 
+                if(pss.isEmpty() || nme.isEmpty()){
+                    tost("empty h bhau");
+                    return;
+                }
+
                 lauth.signInWithEmailAndPassword(nme,pss).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
